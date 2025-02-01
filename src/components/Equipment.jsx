@@ -4,9 +4,6 @@ import { signInWithPopup } from "firebase/auth";
 import { auth, database, provider } from "../lib/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ref, get, set, push, remove } from "firebase/database";
-// import { QRCode } from 'qrcode.react';
-import QRCodeLib from "qrcode";
-import QRCode from "qrcode.react";
 import Link from "next/link";
 
 export function Equipment() {
