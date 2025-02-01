@@ -37,11 +37,11 @@ function SignInButton() {
     const user = result.user;
 
     // メールアドレスのドメインを確認
-    if (!user.email.endsWith("@ous.jp")) {
+    if (!user.email?.endsWith("@ous.jp")) {
       alert("大学のメールアドレスでログインしてください。");
-      await auth.signOut();  // サインアウト
+      await auth.signOut(); // サインアウト
     }
-    // signInWithPopup(auth, provider);
+
   };
 
   return (
