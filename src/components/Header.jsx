@@ -31,20 +31,48 @@ export function Header() {
 
 function SignInButton() {
   const signInWithGoogle = async () => {
-    // ログイン
-    // Googleでポップアップ認証を実行
-    const result = await signInWithPopup(auth, provider);
-    const user = result.user;
-
-    // メールアドレスの取得
-    const email = user.email || user.providerData[0]?.email;
-    console.log("取得したメールアドレス:", email); // デバッグ用
-
-    if (!user.email.endsWith("@ous.jp")) {
-      alert("大学のメールアドレスでログインしてください。");
-      await auth.signOut(); // サインアウト
+    try {
+      // リダイレクトでログインを試みる
+      await signInWithRedirect(auth, provider);
+    } catch (error) {
+      console.error("ログインエラー:", error.message);
+      alert("ログインに失敗しました。再度お試しください。");
     }
   };
+
+  // リダイレクト後の結果を取得
+  useEffect(() => {
+    const checkRedirectResult = async () => {
+      const result = await getRedirectResult(auth);
+      if (result) {
+        const user = result.user;
+        if (user && !user.email.endsWith("@ous.jp")) {
+          alert("大学のメールアドレスでログインしてください。");
+          await auth.signOut(); // サインアウト
+        } else {
+          console.log("ログイン成功:", user.email);
+        }
+      }
+    };
+    checkRedirectResult();
+  }, []);
+
+// function SignInButton() {
+//   const signInWithGoogle = async () => {
+//     // ログイン
+//     // Googleでポップアップ認証を実行
+//     const result = await signInWithPopup(auth, provider);
+//     const user = result.user;
+
+//     // メールアドレスの取得
+//     const email = user.email || user.providerData[0]?.email;
+//     console.log("取得したメールアドレス:", email); // デバッグ用
+
+//     if (!user.email.endsWith("@ous.jp")) {
+//       alert("大学のメールアドレスでログインしてください。");
+//       await auth.signOut(); // サインアウト
+//     }
+//   };
 
   return (
     <button
