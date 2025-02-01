@@ -36,12 +36,18 @@ function SignInButton() {
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
 
+    // メールアドレスの確認
+    if (!user.email) {
+      alert("ログインに失敗しました。メールアドレスが取得できません。");
+      await auth.signOut();
+      return;
+    }
+
     // メールアドレスのドメインを確認
     if (!user.email?.endsWith("@ous.jp")) {
       alert("大学のメールアドレスでログインしてください。");
       await auth.signOut(); // サインアウト
     }
-
   };
 
   return (
