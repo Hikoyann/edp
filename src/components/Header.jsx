@@ -100,14 +100,6 @@ function UserInfo({ user }) {
           <div className="text-gray-700">{user.email || "Anonymous User"}</div>
           <div className="mt-2">
             <a
-              href="/qrReading" // 備品一覧のURLを指定
-              className="hover:underline hover:text-blue-600 text-gray-800"
-            >
-              QRコード読み取り
-            </a>
-          </div>
-          <div className="mt-2">
-            <a
               href="/equipmentRegistry" // 備品一覧のURLを指定
               className="hover:underline hover:text-blue-600 text-gray-800"
             >
