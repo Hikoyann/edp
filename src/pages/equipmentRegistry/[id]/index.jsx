@@ -77,7 +77,11 @@ const MgmtID = ({ mgmt, _equipments = {} }) => {
 
         if (returnDate < today && !equipment.isReturned) {
           // isReturnedは返却されているかどうかのフラグ
-          const message = `⚠️ **重要** ⚠️\n備品：${equipment.equipmentName}（ID: ${equipment.equipmentNum}）が返却予定日を過ぎました。\n早急に備品の返却を促してください。`;
+          const message = `⚠️ **重要** ⚠️\n${
+            user.displayName || user.email
+          } さんが借りている\n備品：${equipment.equipmentName}（ID: ${
+            equipment.equipmentNum
+          }）が返却予定日を過ぎました。\n早急に備品の返却を促してください。`;
           sendToDiscord(message); // Discordに通知
         }
       }
@@ -104,6 +108,7 @@ const MgmtID = ({ mgmt, _equipments = {} }) => {
     if (user) {
       const updatedInputs = {
         ...inputs,
+        name: `${user.displayName}`,
         equipmentNum: mgmt.num,
         equipmentName: mgmt.equipmentName,
         photo: mgmt.photo,
@@ -113,8 +118,6 @@ const MgmtID = ({ mgmt, _equipments = {} }) => {
       await set(ref(database, `equipments/${id}`), updatedInputs);
       setForm([...form, updatedInputs]);
       setInputs({
-        num: "",
-        name: "",
         purpose: "",
         returnDate: "",
       });
@@ -242,26 +245,6 @@ const MgmtID = ({ mgmt, _equipments = {} }) => {
                   </h2>
                   <form onSubmit={handleSubmit} className="mt-2">
                     <div className="mb-4">
-                      <label className="block">学生番号</label>
-                      <input
-                        type="number"
-                        name="num"
-                        value={inputs.num}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <label className="block">借りる人の名前</label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={inputs.name}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div>
-                    <div className="mb-4">
                       <label className="block">使用用途</label>
                       <input
                         type="text"
@@ -316,7 +299,6 @@ const MgmtID = ({ mgmt, _equipments = {} }) => {
                     <div className="mt-2">
                       <h3>あなたが借りている備品情報</h3>
                       <div>備品番号: {borrowedItem.equipmentNum}</div>
-                      <div>学生番号: {borrowedItem.num}</div>
                       <div>備品番号: {borrowedItem.name}</div>
                       <div>備品名: {borrowedItem.equipmentName}</div>
                       <div>

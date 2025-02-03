@@ -42,7 +42,6 @@ export function Mgmt() {
             <div key={index} className="mgmt-item mt-4">
               <div>登録順: {index + 1}</div>
               <div>備品番号: {mgmt.equipmentNum}</div>
-              <div>学生番号: {mgmt.num}</div>
               <div>名前: {mgmt.name}</div>
               <div>備品名: {mgmt.equipmentName}</div>
               <div>
