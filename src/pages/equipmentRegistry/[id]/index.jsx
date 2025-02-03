@@ -299,7 +299,7 @@ const MgmtID = ({ mgmt, _equipments = {} }) => {
                     <div className="mt-2">
                       <h3>あなたが借りている備品情報</h3>
                       <div>備品番号: {borrowedItem.equipmentNum}</div>
-                      <div>備品番号: {borrowedItem.name}</div>
+                      <div>名前: {borrowedItem.name}</div>
                       <div>備品名: {borrowedItem.equipmentName}</div>
                       <div>
                         <h2>写真:</h2>
