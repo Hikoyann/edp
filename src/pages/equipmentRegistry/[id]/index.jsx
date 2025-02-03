@@ -315,7 +315,7 @@ const MgmtID = ({ mgmt, _equipments = {} }) => {
                       </div>
                       <div>用途: {borrowedItem.purpose}</div>
                       <div>返却予定日: {borrowedItem.returnDate}</div>
-                      <div>備品番号: {borrowedItem.email}</div>
+                      <div>メールアドレス: {borrowedItem.email}</div>
                       <h2>
                         あなたが借りている備品情報と合っていれば返却をしてください。
                       </h2>
